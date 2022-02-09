@@ -4,12 +4,16 @@ import NextLink from 'next/link';
 import { AppBar, Link, Toolbar, Typography } from '@mui/material';
 import useStyles from '../utils/styles';
 
-function Header() {
+function Header({ title }) {
   const classes = useStyles();
   return (
     <div>
       <Head>
-        <title>Top-Drawer Collections</title>
+        <title>
+          {title
+            ? `${title} - Top-Drawer Collections`
+            : 'Top-Drawer Collections'}
+        </title>
       </Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
