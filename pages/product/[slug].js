@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import data from '../../utils/data';
 import Layout from '../../components/Layout';
 import NextLink from 'next/link';
-import { Link } from '@mui/material';
+import { Link, Grid } from '@mui/material';
 import useStyles from '../../utils/styles';
 
 function ProductScreen() {
@@ -22,6 +22,17 @@ function ProductScreen() {
           <Link>Bact to products</Link>
         </NextLink>
       </div>
+      <Grid container spacing={1}>
+        <Grid item md={6} xs={12}>
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={640}
+            height={640}
+            layout="responsive"
+          ></Image>
+        </Grid>
+      </Grid>
     </Layout>
   );
 }
