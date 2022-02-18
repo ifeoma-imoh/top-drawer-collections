@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { AppBar, Link, Toolbar, Typography } from '@mui/material';
 import useStyles from '../utils/styles';
 
-function Header({ title }) {
+function Header({ title, description }) {
   const classes = useStyles();
   return (
     <div>
@@ -14,6 +14,7 @@ function Header({ title }) {
             ? `${title} - Top-Drawer Collections`
             : 'Top-Drawer Collections'}
         </title>
+        {description && <meta name="description" content={description}></meta>}
       </Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
