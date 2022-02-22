@@ -1,11 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { AppBar, Link, Toolbar, Typography } from '@mui/material';
+import { AppBar, Link, Switch, Toolbar, Typography } from '@mui/material';
 import useStyles from '../utils/styles';
 
-function Header({ title, description }) {
+function Header({ title, mode, description }) {
   const classes = useStyles();
+
   return (
     <div>
       <Head>
@@ -25,6 +26,7 @@ function Header({ title, description }) {
           </NextLink>
           <div className={classes.grow}></div>
           <div>
+            <Switch ckecked={mode} onChange={darkModeChangeHandler}></Switch>
             <NextLink href="/cart" passHref>
               <Link>Cart</Link>
             </NextLink>

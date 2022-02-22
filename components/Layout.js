@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from './Header';
 import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import Footer from './Footer';
 import useStyles from '../utils/styles';
 import { createTheme } from '@mui/material/styles';
+import { Store } from '../utils/store';
 
 function Layout({ title, description, children }) {
+  const { state, dispatch } = useContext(Store);
+  const { darkMode } = state;
   const theme = createTheme({
     typography: {
       h1: {
@@ -20,7 +23,7 @@ function Layout({ title, description, children }) {
       },
     },
     palette: {
-      type: 'light',
+      type: darkMode ? 'dark' : 'light',
       primary: {
         main: '#f0c000',
       },
@@ -35,7 +38,7 @@ function Layout({ title, description, children }) {
     <div>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header title={title} description={description} />
+        <Header mode={darkMode} title={title} description={description} />
         <Container className={classes.main}>{children}</Container>
         <Footer />
       </ThemeProvider>
