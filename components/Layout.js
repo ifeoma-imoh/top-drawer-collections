@@ -15,6 +15,7 @@ import Footer from './Footer';
 import useStyles from '../utils/styles';
 import { createTheme } from '@mui/material/styles';
 import { Store } from '../utils/store';
+import Cookies from 'js-cookie';
 
 function Layout({ title, description, children }) {
   const { state, dispatch } = useContext(Store);
@@ -46,6 +47,8 @@ function Layout({ title, description, children }) {
   const classes = useStyles();
   const darkModeChangeHandler = () => {
     dispatch({ type: darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON' });
+    const newDarkMode = !darkMode;
+    Cookies.set('darkMode', newDarkMode ? 'ON' : 'OFF');
   };
   return (
     <div>
