@@ -1,6 +1,16 @@
 import React, { useContext } from 'react';
-import Header from './Header';
-import { Container, CssBaseline, ThemeProvider } from '@mui/material';
+import Head from 'next/head';
+import {
+  Container,
+  CssBaseline,
+  ThemeProvider,
+  AppBar,
+  Link,
+  Switch,
+  Toolbar,
+  Typography,
+} from '@mui/material';
+import NextLink from 'next/link';
 import Footer from './Footer';
 import useStyles from '../utils/styles';
 import { createTheme } from '@mui/material/styles';
@@ -34,11 +44,39 @@ function Layout({ title, description, children }) {
   });
 
   const classes = useStyles();
+  const darkModeChangeHandler = () => {
+    dispatch({ type: darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON' });
+  };
   return (
     <div>
+      <Head>
+        <title>{title ? `${title} - Top Drawer ` : 'Top Drawer'}</title>
+        {description && <meta name="description" content={description}></meta>}
+      </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header mode={darkMode} title={title} description={description} />
+        <AppBar position="static" className={classes.navbar}>
+          <Toolbar>
+            <NextLink href="/" passHref>
+              <Link>
+                <Typography className={classes.brand}>Top-Drawer</Typography>
+              </Link>
+            </NextLink>
+            <div className={classes.grow}></div>
+            <div>
+              <Switch
+                ckecked={darkMode}
+                onChange={darkModeChangeHandler}
+              ></Switch>
+              <NextLink href="/cart" passHref>
+                <Link>Cart</Link>
+              </NextLink>
+              <NextLink href="/login" passHref>
+                <Link>Login</Link>
+              </NextLink>
+            </div>
+          </Toolbar>
+        </AppBar>
         <Container className={classes.main}>{children}</Container>
         <Footer />
       </ThemeProvider>
